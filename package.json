@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/bradcoleman60/note-taker.git"
   },
-  "keywords": [],
+  "keywords": ["example", "heroku"],
   "author": "",
   "license": "ISC",
   "bugs": {
