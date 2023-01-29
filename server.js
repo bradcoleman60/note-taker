@@ -1,19 +1,14 @@
+//Set dependencies
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const app = express();
+const unique = require("./public/js/unique-user-number");
+const dayjs = require("dayjs");
+
+//Make all files and folders in public folders available at the base URL
 app.use(express.static("public"));
 app.use(express.json());
-// const port = 3009;
-const unique = require("./public/js/unique-user-number");
-const dayjs = require('dayjs')
-
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//   port = 8000;
-// }
-// app.listen(port);
-
 
 //Sends index.html file when a user requests our ip address
 app.get("/", (req, res) => {
@@ -45,7 +40,7 @@ app.post("/api/notes", (req, res) => {
       title,
       text,
       id: unique(),
-      dateStamp: dayjs().format('MM/DD/YYYY hh:mmA')
+      dateStamp: dayjs().format("MM/DD/YYYY hh:mmA"),
     };
     //Retrieve current list of notes
     fs.readFile("./db/db.json", "utf-8", (err, data) => {
@@ -68,46 +63,37 @@ app.post("/api/notes", (req, res) => {
 
 //Delete command with param of 'id' to accept id from client
 app.delete("/api/notes/:id", (req, res) => {
+  //Deconstructs req.params to use element of 'id' as a variable
+  const { id } = req.params;
+  //Console Logs message that a DELETE request has been received.
+  console.log(`${req.method} request received to delete a note with id: ${id}`);
 
-//Deconstructs req.params to use element of 'id' as a variable
-const {id} = req.params
-//Console Logs message that a DELETE request has been received. 
-console.log(`${req.method} request received to delete a note with id: ${id}`);
+  //Retrieve current list of notes from db.json file
+  fs.readFile("./db/db.json", "utf-8", (err, data) => {
+    //Parse the db.json file in order to be able to use array methods
+    var notesDbParsed = JSON.parse(data);
+    console.log(notesDbParsed);
 
-//Retrieve current list of notes from db.json file
-fs.readFile("./db/db.json", "utf-8", (err, data) => {
+    //Remove the note using filter method and create new array that excludes the requested note id
+    var newNoteArray = notesDbParsed.filter((data) => data.id != id);
+    console.log(newNoteArray);
 
-//Parse the db.json file in order to be able to use array methods
-var notesDbParsed = JSON.parse(data);
-console.log(notesDbParsed);
+    //Stringify the new array that excludes the requested note id
+    var newNotesArrayStringified = JSON.stringify(newNoteArray);
 
-//Remove the note using filter method and create new array that excludes the requested note id
-var newNoteArray = notesDbParsed.filter(data => data.id != id);
-console.log(newNoteArray);
-
-//Stringify the new array that excludes the requested note id
-var newNotesArrayStringified = JSON.stringify(newNoteArray);
-
-//Write the stringified new array to the db.json file
-fs.writeFile("./db/db.json", newNotesArrayStringified, (err) =>
-err
-  ? console.log(err)
-  : console.log(`Note has been removed from JSON file`)
-);
-
-})
-
-})
-
-
-
-
-//listens for request to port number
-app.listen(process.env.PORT || 3009 , () => {
-  console.log(`Example app listening on port 3009`);
+    //Write the stringified new array to the db.json file
+    fs.writeFile("./db/db.json", newNotesArrayStringified, (err) =>
+      err
+        ? console.log(err)
+        : console.log(`Note has been removed from JSON file`)
+    );
+  });
 });
 
-//THIS WORKS
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
+/*This allows for the PORT number to be dependent on the processing 
+environment. If deployed on a hosted web server the port will 
+be dictated by that hosting service.  If a hosting service is 
+not detected then a the local port 3009 will used*/
+app.listen(process.env.PORT || 3009, () => {
+  console.log(`The app is listening`);
+});
