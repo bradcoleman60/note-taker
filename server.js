@@ -1,7 +1,6 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-// const { title } = require("process");
 const app = express();
 app.use(express.static("public"));
 app.use(express.json());
@@ -39,7 +38,7 @@ app.post("/api/notes", (req, res) => {
       title,
       text,
       id: unique(),
-      dateStamp: Date().
+      dateStamp: dayjs().format('MM/DD/YYYY hh:mmA')
     };
     //Retrieve current list of notes
     fs.readFile("./db/db.json", "utf-8", (err, data) => {
@@ -59,6 +58,42 @@ app.post("/api/notes", (req, res) => {
     });
   }
 });
+
+//Delete command with param of 'id' to accept id from client
+app.delete("/api/notes/:id", (req, res) => {
+
+//Deconstructs req.params to use element of 'id' as a variable
+const {id} = req.params
+//Console Logs message that a DELETE request has been received. 
+console.log(`${req.method} request received to delete a note with id: ${id}`);
+
+//Retrieve current list of notes from db.json file
+fs.readFile("./db/db.json", "utf-8", (err, data) => {
+
+//Parse the db.json file in order to be able to use array methods
+var notesDbParsed = JSON.parse(data);
+console.log(notesDbParsed);
+
+//Remove the note using filter method and create new array that excludes the requested note id
+var newNoteArray = notesDbParsed.filter(data => data.id != id);
+console.log(newNoteArray);
+
+//Stringify the new array that excludes the requested note id
+var newNotesArrayStringified = JSON.stringify(newNoteArray);
+
+//Write the stringified new array to the db.json file
+fs.writeFile("./db/db.json", newNotesArrayStringified, (err) =>
+err
+  ? console.log(err)
+  : console.log(`Note has been removed from JSON file`)
+);
+
+})
+
+})
+
+
+
 
 //listens for request to port number
 app.listen(port, () => {

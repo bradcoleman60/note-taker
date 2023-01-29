@@ -1,5 +1,6 @@
 let noteTitle;
 let noteText;
+let noteDate;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
@@ -7,6 +8,7 @@ let noteList;
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
+  noteDate = document.querySelector('.date-stamp');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
@@ -38,9 +40,6 @@ return json;
 
 };
 
-console.log(activeNote)
-
-
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -50,12 +49,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
     
   }).then (console.log(note))
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log('Successful POST request:', data);
-//     //Empty the input fields
-//     return data;
-//   })
+
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -63,6 +57,7 @@ const deleteNote = (id) =>
     headers: {
       'Content-Type': 'application/json',
     },
+    // body: id
   });
 
 const renderActiveNote = () => {
@@ -71,13 +66,17 @@ const renderActiveNote = () => {
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
+    noteDate.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
+    noteDate.value = activeNote.dateStamp;
   } else {
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
+    noteDate.removeAttribute('readonly');
     noteTitle.value = '';
     noteText.value = '';
+    noteDate.value = '';
   }
 };
 
@@ -104,13 +103,19 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const note = e.target;
+//   const noteId = note.parentElement.getAttribute('data-note').id;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+    console.log(note);
+    console.log(noteId);
 
   if (activeNote.id === noteId) {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {
+  deleteNote(noteId)
+  //Reload the page so the saved note renders on left container after deletion of note
+  .then (location.reload())
+  .then(() => {
     getAndRenderNotes();
     renderActiveNote();
   });

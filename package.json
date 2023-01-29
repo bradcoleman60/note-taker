@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/bradcoleman60/note-taker#readme",
   "dependencies": {
+    "dayjs": "^1.11.7",
     "express": "^4.18.2"
   }
 }
