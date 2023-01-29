@@ -47,14 +47,15 @@ const saveNote = (note) =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(note),
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    console.log('Successful POST request:', data);
-    //Empty the input fields
-    return data;
-  })
+    body: JSON.stringify(note)
+    
+  }).then (console.log(note))
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log('Successful POST request:', data);
+//     //Empty the input fields
+//     return data;
+//   })
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -85,9 +86,15 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
+  console.log(newNote)
+  saveNote(newNote)
+  //Reload the page so the saved note renders on left container after save
+  .then (location.reload())
+  // After save and reload of page, then get and render all saved notes
+  .then(() => {
     getAndRenderNotes();
     renderActiveNote();
+   
   });
 };
 
@@ -132,10 +139,10 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
-const renderNoteList = async (notes) => {
+const renderNoteList =  (notes) => {
     console.log(notes);
 //   let jsonNotes = await notes.json();
-  let jsonNotes = await notes;
+  let jsonNotes = notes;
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -174,8 +181,8 @@ const renderNoteList = async (notes) => {
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
   }
-
-  jsonNotes.forEach((note) => {
+  console.log()
+    jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
 
@@ -188,7 +195,10 @@ const renderNoteList = async (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderNotes = () => getNotes().then ( (notes) => {
+    
+    renderNoteList(notes) }
+    );
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);

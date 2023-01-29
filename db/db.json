@@ -1,12 +1,78 @@
 [
-    {
-        "title":"Test Brad's Note",
-        "text":"Make sure to lock the doors",
-        "id": "877837"
-    },
-    {
-        "title":"Test POPPY ",
-        "text":"BUY DOG FOOD",
-        "id": "8767838"
-    }
+  {
+    "title": "Test Brad's Note",
+    "text": "Make sure to lock the doors",
+    "id": "877837"
+  },
+  { "title": "Test POPPY ", "text": "BUY DOG FOOD", "id": "8767838" },
+  {
+    "title": "test ",
+    "text": "TEtd",
+    "dateStamp": "Sat Jan 28 2023 16:52:15 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Test ahdin",
+    "text": "Teyhdhd",
+    "dateStamp": "Sat Jan 28 2023 16:54:17 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Test a new note",
+    "text": "Yes",
+    "id": 186362,
+    "dateStamp": "Sat Jan 28 2023 17:08:03 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Another new note",
+    "text": "HA",
+    "id": 107485,
+    "dateStamp": "Sat Jan 28 2023 17:08:38 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "YET ANOTHER NOTE",
+    "text": "TEST ",
+    "id": 143051,
+    "dateStamp": "Sat Jan 28 2023 17:17:11 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "New Note",
+    "text": "Add a new note",
+    "id": 186306,
+    "dateStamp": "Sat Jan 28 2023 17:44:12 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Jjdjd",
+    "text": "ewkekke",
+    "id": 182349,
+    "dateStamp": "Sat Jan 28 2023 18:34:17 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "pppp",
+    "text": "mmmm",
+    "id": 165706,
+    "dateStamp": "Sat Jan 28 2023 19:29:52 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Brad Coleman",
+    "text": "Wash Car",
+    "id": 116032,
+    "dateStamp": "Sat Jan 28 2023 19:37:10 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "TEST WWWWWWWWWWW",
+    "text": "HHHHHHHHHHHH",
+    "id": 166696,
+    "dateStamp": "Sat Jan 28 2023 19:41:12 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Kevin",
+    "text": "Buy grocries",
+    "id": 144314,
+    "dateStamp": "Sat Jan 28 2023 19:44:09 GMT-0800 (Pacific Standard Time)"
+  },
+  {
+    "title": "Test the date",
+    "text": "Test rth edate",
+    "id": 138584,
+    "dateStamp": "Sat Jan 28 2023 19:50:56 GMT-0800 (Pacific Standard Time)"
+  }
 ]

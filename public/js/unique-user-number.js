@@ -4,9 +4,9 @@ function unqiqueId () {
     var uid = Math.floor(Math.random() * 100000)+100000
     
 //   console.log(uid)
-  
+  return uid
   }
-  unqiqueId();
+  
   
 
   module.exports = unqiqueId
