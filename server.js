@@ -21,16 +21,14 @@ app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/db/db.json'))
    
     //Log request to terminal
-    console.info(`${req.method} request received to get reviews`);
+    console.info(`${req.method} request received to get notes`);
 })
 
 app.post('/api/notes', (req, res) => {
     //Log that a POST request was received
     console.log(`${req.method} request received to add a note`);
     //Destructure the assignment of the items in the form submission
-    
-
-    
+        
 })
 
 
