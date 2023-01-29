@@ -1,6 +1,6 @@
 let noteTitle;
 let noteText;
-let noteDate;
+// let noteDate;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
@@ -8,7 +8,7 @@ let noteList;
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
-  noteDate = document.querySelector('.date-stamp');
+//   noteDate = document.querySelector('.date-stamp');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
@@ -40,6 +40,7 @@ return json;
 
 };
 
+// Fetches a POST call to api/notes 
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -50,14 +51,13 @@ const saveNote = (note) =>
     
   }).then (console.log(note))
 
-
+// Fetches a delete call to the api/note/:id end point 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    // body: id
   });
 
 const renderActiveNote = () => {
@@ -66,17 +66,17 @@ const renderActiveNote = () => {
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
-    noteDate.setAttribute('readonly', true);
+    // noteDate.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
-    noteDate.value = activeNote.dateStamp;
+    // noteDate.value = activeNote.dateStamp;
   } else {
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
-    noteDate.removeAttribute('readonly');
+    // noteDate.removeAttribute('readonly');
     noteTitle.value = '';
     noteText.value = '';
-    noteDate.value = '';
+    // noteDate.value = '';
   }
 };
 
@@ -103,7 +103,6 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const note = e.target;
-//   const noteId = note.parentElement.getAttribute('data-note').id;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
     console.log(note);
     console.log(noteId);
@@ -113,7 +112,7 @@ const handleNoteDelete = (e) => {
   }
 
   deleteNote(noteId)
-  //Reload the page so the saved note renders on left container after deletion of note
+  //Reload the page so the saved notes render on left container after deletion of note
   .then (location.reload())
   .then(() => {
     getAndRenderNotes();
@@ -144,10 +143,10 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
-const renderNoteList =  (notes) => {
+const renderNoteList = async (notes) => {
     console.log(notes);
 //   let jsonNotes = await notes.json();
-  let jsonNotes = notes;
+  let jsonNotes = await notes;
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }

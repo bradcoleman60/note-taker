@@ -37,20 +37,19 @@ body {
   font-size: 3rem;
 }
 
-.date-stamp {
+/* .date-stamp {
     height: 40px;
     margin-top: 13px;
     font-size: 3rem;
-}
+} */
 
-p:read-only {
+/* p:read-only {
     color: red;
     
-}
+} */
 
 .note-title:read-only,
-.note-textarea:read-only,
-.date-stamp:read-only {
+.note-textarea:read-only {
   color: #757575;
 }
 
