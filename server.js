@@ -4,9 +4,16 @@ const path = require("path");
 const app = express();
 app.use(express.static("public"));
 app.use(express.json());
-const port = 3009;
+// const port = 3009;
 const unique = require("./public/js/unique-user-number");
 const dayjs = require('dayjs')
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+app.listen(port);
+
 
 //Sends index.html file when a user requests our ip address
 app.get("/", (req, res) => {
