@@ -57,14 +57,14 @@ app.post("/api/notes", (req, res) => {
       //Stringify the array
       var notesDbStringified = JSON.stringify(notesDbParsed);
       //Write string to a file
-      fs.writeFile("./db/db.json", notesDbStringified, (err) =>
+      fs.writeFile("./db/db.json", notesDbStringified, (err) => {
         err
-          ? console.log(err)
-          : console.log(`Note has been written to JSON file`)
-      );
+          ? res.status(400).json(err)
+          : res.status(200).json(notesDbParsed)
     });
-  }
-});
+  })
+  
+}});
 
 //Delete command with param of 'id' to accept id from client
 app.delete("/api/notes/:id", (req, res) => {
