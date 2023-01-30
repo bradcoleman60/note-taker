@@ -1,6 +1,5 @@
 let noteTitle;
 let noteText;
-// let noteDate;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
@@ -8,7 +7,6 @@ let noteList;
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
-//   noteDate = document.querySelector('.date-stamp');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
@@ -66,17 +64,13 @@ const renderActiveNote = () => {
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
-    // noteDate.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
-    // noteDate.value = activeNote.dateStamp;
   } else {
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
-    // noteDate.removeAttribute('readonly');
     noteTitle.value = '';
     noteText.value = '';
-    // noteDate.value = '';
   }
 };
 

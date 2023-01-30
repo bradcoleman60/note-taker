@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const app = express();
 const unique = require("./public/js/unique-user-number");
-const dayjs = require("dayjs");
+// const dayjs = require("dayjs");
 
 //Make all files and folders in public folders available at the base URL
 app.use(express.static("public"));
@@ -39,8 +39,7 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      id: unique(),
-      dateStamp: dayjs().format("MM/DD/YYYY hh:mmA"),
+      id: unique()
     };
     //Retrieve current list of notes
     fs.readFile("./db/db.json", "utf-8", (err, data) => {
