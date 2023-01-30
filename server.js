@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require("path");
 const app = express();
 const unique = require("./public/js/unique-user-number");
-// const dayjs = require("dayjs");
 
 //Make all files and folders in public folders available at the base URL
 app.use(express.static("public"));

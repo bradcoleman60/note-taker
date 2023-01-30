@@ -13,6 +13,4 @@ function uId () {
     return uid
   }
   
-  
-
   module.exports = uId
